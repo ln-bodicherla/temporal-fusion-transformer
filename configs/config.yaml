@@ -1,0 +1,40 @@
+model:
+  hidden_size: 64
+  attention_head_size: 4
+  dropout: 0.1
+  hidden_continuous_size: 16
+  output_size: 7
+  loss: "QuantileLoss"
+
+data:
+  max_encoder_length: 60
+  max_prediction_length: 20
+  target: "rul"
+  time_idx: "cycle"
+  group_ids: ["unit_id"]
+  static_categoricals: ["op_setting"]
+  time_varying_known_reals: ["cycle"]
+  time_varying_unknown_reals:
+    - "sensor_1"
+    - "sensor_2"
+    - "sensor_3"
+    - "sensor_4"
+    - "sensor_5"
+    - "sensor_6"
+    - "sensor_7"
+
+training:
+  max_epochs: 50
+  batch_size: 64
+  learning_rate: 0.001
+  gradient_clip_val: 0.1
+  patience: 10
+  accelerator: "auto"
+  log_every_n_steps: 10
+
+synthetic_data:
+  num_units: 100
+  max_cycles: 300
+  num_sensors: 7
+  noise_std: 0.05
+  seed: 42

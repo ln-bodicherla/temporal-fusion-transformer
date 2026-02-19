@@ -1,0 +1,51 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# PyTorch Lightning
+lightning_logs/
+checkpoints/
+*.ckpt
+
+# TensorBoard
+runs/
+tb_logs/
+
+# Data
+data/
+*.csv
+*.parquet
+*.h5
+*.hdf5
+
+# Model artifacts
+models/
+*.pt
+*.pth
+*.pkl
+*.joblib
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
