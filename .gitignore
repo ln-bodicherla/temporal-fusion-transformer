@@ -1,51 +1,70 @@
+
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg-info/
-dist/
-build/
-*.egg
+!.env.example
+!.env.sample
+.build/
+.DS_Store
 .eggs/
-
-# Virtual environments
-venv/
-env/
-.venv/
-
-# IDE
-.vscode/
+.env
+.env.*
 .idea/
-*.swp
-*.swo
-*~
-
-# PyTorch Lightning
-lightning_logs/
-checkpoints/
+.ipynb_checkpoints/
+.swiftpm/
+.venv/
+.vscode/
+*.app
 *.ckpt
-
-# TensorBoard
-runs/
-tb_logs/
-
-# Data
-data/
 *.csv
-*.parquet
+*.db
+*.db-shm
+*.db-wal
+*.egg
+*.egg-info/
 *.h5
 *.hdf5
-
-# Model artifacts
-models/
+*.ipa
+*.joblib
+*.key
+*.parquet
+*.pem
+*.pkl
 *.pt
 *.pth
-*.pkl
-*.joblib
-
-# OS
-.DS_Store
-Thumbs.db
-
+*.py[cod]
+*.pyc
+*.secret
+*.so
+*.sqlite
+*.sqlite3
+*.swo
+*.swp
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*~
+*$py.class
+# Build
+# Data
+# Databases
+# Dependencies
+# IDE
 # Jupyter
-.ipynb_checkpoints/
+# Model artifacts
+# OS
+# PyTorch Lightning
+# Secrets
+# TensorBoard
+# Virtual environments
+build/
+checkpoints/
+credentials*
+data/
+DerivedData/
+dist/
+env/
+lightning_logs/
+models/
+node_modules/
+runs/
+tb_logs/
+Thumbs.db
+venv/
