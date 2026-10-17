@@ -2,7 +2,9 @@
 
 Attention-based architecture for multi-horizon time series prediction with built-in interpretability. Provides variable importance rankings and temporal attention patterns for understanding which features and time steps drive predictions.
 
-This project implements the Temporal Fusion Transformer (TFT) for predictive maintenance remaining useful life (RUL) estimation. Unlike single-step LSTM approaches, TFT produces calibrated probabilistic forecasts across multiple future horizons simultaneously, with native support for static covariates, known future inputs, and observed past inputs.
+This project implements the Temporal Fusion Transformer (TFT) for predictive maintenance remaining useful life (RUL) estimation. Unlike single-step LSTM approaches, TFT produces quantile (probabilistic) forecasts across multiple future horizons simultaneously, with native support for static covariates, known future inputs, and observed past inputs.
+
+Uses generated synthetic sensor-degradation data for demonstration when no `--data` CSV is supplied.
 
 ## Architecture
 
@@ -18,7 +20,7 @@ The TFT architecture combines several components:
 
 - **Multi-Horizon Forecasting**: Predict RUL at multiple future time steps in a single forward pass
 - **Interpretability**: Built-in attention weights reveal temporal patterns and variable importance
-- **Quantile Loss**: Calibrated prediction intervals via quantile regression (10th, 25th, 50th, 75th, 90th percentiles)
+- **Quantile Loss**: Prediction intervals via quantile regression (10th, 25th, 50th, 75th, 90th percentiles)
 - **Variable Selection**: Automatic identification of the most informative sensors and operating conditions
 - **Static Covariates**: Incorporate unit-level metadata (operating regime, fleet ID) alongside time-varying sensors
 
@@ -49,9 +51,6 @@ pip install -r requirements.txt
 # Train with synthetic data
 python -m src.tft_model --config configs/config.yaml
 
-# Run evaluation
-python -m src.evaluation --checkpoint lightning_logs/best.ckpt
-
 # Start API server
 uvicorn src.api:app --host 0.0.0.0 --port 8000
 ```
@@ -74,15 +73,9 @@ Model hyperparameters, data settings, and training configuration are centralized
 - `max_prediction_length`: Number of future horizons to predict
 - `loss`: Quantile loss for probabilistic forecasting
 
-## Results
+## Evaluation
 
-On the C-MAPSS turbofan degradation dataset (synthetic variant):
-
-| Metric | TFT (Multi-Horizon) | LSTM (Single-Step) |
-|--------|--------------------|--------------------|
-| RMSE   | 14.2               | 15.8               |
-| MAE    | 10.1               | 11.3               |
-| Coverage (90%) | 0.91        | N/A                |
+No results are published in this repository. `src/evaluation.py` provides `TFTEvaluator`, which computes RMSE, MAE, MAPE and SMAPE per prediction horizon plus interval calibration, and `generate_report(actuals, predictions, output_dir="reports")` writes `metrics.json` and plots. It is a library class, not a CLI; call it from Python on the predictions produced by `TFTPredictor.predict`.
 
 ## License
 
